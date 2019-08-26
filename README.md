@@ -1,0 +1,1 @@
+# sincronia-server-scoped-app
