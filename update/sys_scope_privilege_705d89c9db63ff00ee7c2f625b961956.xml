@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_scope_privilege">
+    <sys_scope_privilege action="INSERT_OR_UPDATE">
+        <operation>read</operation>
+        <source_scope display_value="Sincronia">cd628585db63fb004a8da5094b96198c</source_scope>
+        <status>allowed</status>
+        <sys_class_name>sys_scope_privilege</sys_class_name>
+        <sys_created_by>breyton.barber@nuvolo.com</sys_created_by>
+        <sys_created_on>2019-08-26 22:38:49</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>705d89c9db63ff00ee7c2f625b961956</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>sys_ui_context_menu</sys_name>
+        <sys_package display_value="Sincronia" source="x_nuvo_sinc">cd628585db63fb004a8da5094b96198c</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Sincronia">cd628585db63fb004a8da5094b96198c</sys_scope>
+        <sys_update_name>sys_scope_privilege_705d89c9db63ff00ee7c2f625b961956</sys_update_name>
+        <sys_updated_by>breyton.barber@nuvolo.com</sys_updated_by>
+        <sys_updated_on>2019-08-26 22:38:49</sys_updated_on>
+        <target_name>sys_ui_context_menu</target_name>
+        <target_scope display_value="Global">global</target_scope>
+        <target_type>sys_db_object</target_type>
+    </sys_scope_privilege>
+</record_update>
