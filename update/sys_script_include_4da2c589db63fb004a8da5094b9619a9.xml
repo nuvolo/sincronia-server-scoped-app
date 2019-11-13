@@ -194,6 +194,7 @@ var SincUtilsMS =
           var records = {};
           var recGR = new GlideRecord(tableName);
           recGR.addQuery("sys_scope", scopeId);
+          recGR.addQuery("sys_class_name", tableName);
 
           if (tableOptions.query !== undefined) {
             recGR.addEncodedQuery(tableOptions.query);
@@ -241,14 +242,33 @@ var SincUtilsMS =
           }
 
           if (tableOptions.differentiatorField !== undefined) {
-            recordName = ""
-              .concat(recordName, " (")
-              .concat(
-                recGR
-                  .getElement(tableOptions.differentiatorField)
-                  .getDisplayValue(),
-                ")"
-              );
+            if (typeof tableOptions.differentiatorField === "string") {
+              recordName = ""
+                .concat(recordName, " (")
+                .concat(
+                  recGR
+                    .getElement(tableOptions.differentiatorField)
+                    .getDisplayValue(),
+                  ")"
+                );
+            }
+
+            if (_typeof(tableOptions.differentiatorField) === "object") {
+              var diffArr = tableOptions.differentiatorField;
+
+              for (var i = 0; i < diffArr.length; i++) {
+                var field = diffArr[i];
+                var val = recGR.getElement(field).getDisplayValue();
+
+                if (val !== undefined && val !== "") {
+                  recordName = ""
+                    .concat(recordName, " (")
+                    .concat(field, ":")
+                    .concat(val, ")");
+                  break;
+                }
+              }
+            }
           }
 
           if (!recordName || recordName === "") {
@@ -325,7 +345,19 @@ var SincUtilsMS =
             excludes = config.excludes;
           var fieldList = {};
           var dictGR = new GlideRecord("sys_dictionary");
-          dictGR.addQuery("name", tableName); //determine excluded fields
+          var tableHierarchy = new GlideTableHierarchy(tableName);
+
+          if (tableHierarchy.isBaseClass() || tableHierarchy.isSoloClass()) {
+            dictGR.addQuery("name", tableName);
+          } else {
+            var tableList = tableHierarchy.getTables();
+            var tableEQ = tableList
+              .map(function(table) {
+                return "name=" + table;
+              })
+              .join("^OR");
+            dictGR.addEncodedQuery(tableEQ);
+          } //determine excluded fields
 
           var fieldExcludes = this.getFilteredExcludes(config);
 
@@ -457,7 +489,7 @@ var SincUtilsMS =
         <sys_created_on>2019-08-26 21:52:34</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>4da2c589db63fb004a8da5094b9619a9</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>10</sys_mod_count>
         <sys_name>SincUtilsMS</sys_name>
         <sys_package display_value="Sincronia" source="x_nuvo_sinc">cd628585db63fb004a8da5094b96198c</sys_package>
         <sys_policy>read</sys_policy>
@@ -465,6 +497,6 @@ var SincUtilsMS =
         <sys_scope display_value="Sincronia">cd628585db63fb004a8da5094b96198c</sys_scope>
         <sys_update_name>sys_script_include_4da2c589db63fb004a8da5094b9619a9</sys_update_name>
         <sys_updated_by>Breyton.Barber@Nuvolo.com</sys_updated_by>
-        <sys_updated_on>2019-11-13 19:20:51</sys_updated_on>
+        <sys_updated_on>2019-11-13 22:09:39</sys_updated_on>
     </sys_script_include>
 </record_update>
