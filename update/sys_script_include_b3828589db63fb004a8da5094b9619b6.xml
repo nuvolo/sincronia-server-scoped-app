@@ -3,6 +3,7 @@
         <access>public</access>
         <active>true</active>
         <api_name>x_nuvo_sinc.SincUtils</api_name>
+        <caller_access/>
         <client_callable>false</client_callable>
         <description/>
         <name>SincUtils</name>
@@ -52,7 +53,7 @@ function _getPrototypeOf(o) {
   _getPrototypeOf = Object.setPrototypeOf
     ? Object.getPrototypeOf
     : function _getPrototypeOf(o) {
-        return o["__proto-sn__"] || Object.getPrototypeOf(o);
+        return o.__proto_sn__ || Object.getPrototypeOf(o);
       };
   return _getPrototypeOf(o);
 }
@@ -71,7 +72,7 @@ function _setPrototypeOf(o, p) {
   _setPrototypeOf =
     Object.setPrototypeOf ||
     function _setPrototypeOf(o, p) {
-      o["__proto-sn__"] = p;
+      o.__proto_sn__ = p;
       return o;
     };
   return _setPrototypeOf(o, p);
@@ -99,14 +100,14 @@ var SincUtils =
         <sys_created_on>2019-08-26 21:51:58</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>b3828589db63fb004a8da5094b9619b6</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_name>SincUtils</sys_name>
         <sys_package display_value="Sincronia" source="x_nuvo_sinc">cd628585db63fb004a8da5094b96198c</sys_package>
         <sys_policy>read</sys_policy>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Sincronia">cd628585db63fb004a8da5094b96198c</sys_scope>
         <sys_update_name>sys_script_include_b3828589db63fb004a8da5094b9619b6</sys_update_name>
-        <sys_updated_by>Breyton.Barber@nuvolo.com</sys_updated_by>
-        <sys_updated_on>2019-08-26 22:27:37</sys_updated_on>
+        <sys_updated_by>Breyton.Barber@Nuvolo.com</sys_updated_by>
+        <sys_updated_on>2019-11-13 19:20:51</sys_updated_on>
     </sys_script_include>
 </record_update>

@@ -18,7 +18,7 @@
         <sys_updated_by>breyton.barber@nuvolo.com</sys_updated_by>
         <sys_updated_on>2019-08-26 22:38:50</sys_updated_on>
         <target_name>x_nuvo_mobile_nuvolo_property</target_name>
-        <target_scope display_value="Nuvolo Platform Tools">15eb10f90f9a2a00b7fe85ace1050e20</target_scope>
+        <target_scope display_value="Nuvolo Platform Services">15eb10f90f9a2a00b7fe85ace1050e20</target_scope>
         <target_type>sys_db_object</target_type>
     </sys_scope_privilege>
 </record_update>

@@ -3,6 +3,7 @@
         <access>package_private</access>
         <active>true</active>
         <api_name>x_nuvo_sinc.SincUtilsMS</api_name>
+        <caller_access/>
         <client_callable>false</client_callable>
         <description/>
         <name>SincUtilsMS</name>
@@ -102,7 +103,7 @@ var SincUtilsMS =
             excludes = config.excludes;
           var tables = [];
           var appFilesAgg = new GlideAggregate("sys_metadata");
-          appFilesAgg.addQuery("sys_scope", scopeId);
+          appFilesAgg.addQuery("sys_scope", "=", scopeId);
           appFilesAgg.groupBy("sys_class_name");
           appFilesAgg.query();
 
@@ -131,7 +132,10 @@ var SincUtilsMS =
             getContents =
               _config$getContents === void 0 ? false : _config$getContents,
             includes = config.includes,
-            excludes = config.excludes;
+            excludes = config.excludes,
+            _config$tableOptions = config.tableOptions,
+            tableOptions =
+              _config$tableOptions === void 0 ? {} : _config$tableOptions;
           var scopeId = this.getScopeId(scopeName);
           var tables = {};
           var tableNames = this.getTableNames({
@@ -147,7 +151,8 @@ var SincUtilsMS =
               scopeId: scopeId,
               includes: includes,
               excludes: excludes,
-              getContents: getContents
+              getContents: getContents,
+              tableOptions: tableOptions[tableName] || {}
             });
             var records = Object.keys(tableMap.records);
 
@@ -171,7 +176,8 @@ var SincUtilsMS =
             scopeId = config.scopeId,
             getContents = config.getContents,
             includes = config.includes,
-            excludes = config.excludes;
+            excludes = config.excludes,
+            tableOptions = config.tableOptions;
           var results = {
             records: {}
           };
@@ -188,6 +194,11 @@ var SincUtilsMS =
           var records = {};
           var recGR = new GlideRecord(tableName);
           recGR.addQuery("sys_scope", scopeId);
+
+          if (tableOptions.query !== undefined) {
+            recGR.addEncodedQuery(tableOptions.query);
+          }
+
           recGR.query();
 
           while (recGR.next()) {
@@ -204,14 +215,7 @@ var SincUtilsMS =
 
               return file;
             });
-            var recName = (
-              recGR.getDisplayValue() || recGR.getValue("sys_id")
-            ).replace(/[\/\\]/g, "〳");
-
-            if (!recName || recName === "") {
-              recName = recGR.getValue("sys_id");
-            }
-
+            var recName = this.generateRecordName(recGR, tableOptions);
             records[recName] = {
               files: files,
               name: recName,
@@ -223,6 +227,35 @@ var SincUtilsMS =
             records: records
           };
           return tableConfig;
+        }
+      },
+      {
+        key: "generateRecordName",
+        value: function generateRecordName(recGR, tableOptions) {
+          var recordName = recGR.getDisplayValue() || recGR.getValue("sys_id");
+
+          if (tableOptions.displayField !== undefined) {
+            recordName = recGR
+              .getElement(tableOptions.displayField)
+              .getDisplayValue();
+          }
+
+          if (tableOptions.differentiatorField !== undefined) {
+            recordName = ""
+              .concat(recordName, " (")
+              .concat(
+                recGR
+                  .getElement(tableOptions.differentiatorField)
+                  .getDisplayValue(),
+                ")"
+              );
+          }
+
+          if (!recordName || recordName === "") {
+            recordName = recGR.getValue("sys_id");
+          }
+
+          return recordName.replace(/[\/\\]/g, "〳");
         }
       },
       {
@@ -313,11 +346,11 @@ var SincUtilsMS =
           dictGR.query();
 
           while (dictGR.next()) {
-            var _field = {
+            var field = {
               name: dictGR.getValue("element"),
               type: this.typeMap[dictGR.getValue("internal_type")]
             };
-            fieldList[_field.name] = _field;
+            fieldList[field.name] = field;
           } //overrides
 
           if (tableName in includes) {
@@ -343,12 +376,13 @@ var SincUtilsMS =
       },
       {
         key: "processMissingFiles",
-        value: function processMissingFiles(missingObj) {
+        value: function processMissingFiles(missingObj, tableOptions) {
           var fileTableMap = {};
 
           for (var tableName in missingObj) {
             var tableGR = new GlideRecord(tableName);
             var recordMap = missingObj[tableName];
+            var tableOpts = tableOptions[tableName] || {};
             var tableMap = {
               records: {}
             };
@@ -356,7 +390,7 @@ var SincUtilsMS =
             for (var recordID in recordMap) {
               if (tableGR.get(recordID)) {
                 var metaRecord = {
-                  name: tableGR.getDisplayValue(),
+                  name: this.generateRecordName(tableGR, tableOpts),
                   files: [],
                   sys_id: tableGR.getValue("sys_id")
                 };
@@ -367,7 +401,9 @@ var SincUtilsMS =
                   metaRecord.files.push(file);
                 }
 
-                tableMap.records[tableGR.getDisplayValue()] = metaRecord;
+                tableMap.records[
+                  this.generateRecordName(tableGR, tableOpts)
+                ] = metaRecord;
               }
             }
 
@@ -421,14 +457,14 @@ var SincUtilsMS =
         <sys_created_on>2019-08-26 21:52:34</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>4da2c589db63fb004a8da5094b9619a9</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name>SincUtilsMS</sys_name>
         <sys_package display_value="Sincronia" source="x_nuvo_sinc">cd628585db63fb004a8da5094b96198c</sys_package>
         <sys_policy>read</sys_policy>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Sincronia">cd628585db63fb004a8da5094b96198c</sys_scope>
         <sys_update_name>sys_script_include_4da2c589db63fb004a8da5094b9619a9</sys_update_name>
-        <sys_updated_by>Breyton.Barber@nuvolo.com</sys_updated_by>
-        <sys_updated_on>2019-08-26 22:26:37</sys_updated_on>
+        <sys_updated_by>Breyton.Barber@Nuvolo.com</sys_updated_by>
+        <sys_updated_on>2019-11-13 19:20:51</sys_updated_on>
     </sys_script_include>
 </record_update>
