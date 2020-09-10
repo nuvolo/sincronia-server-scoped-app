@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="DELETE">
+        <access>public</access>
+        <active>false</active>
+        <api_name>x_nuvo_sinc.SincUtils__deprecated</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>SincUtils__deprecated</name>
+        <script><![CDATA["use strict";
+
+function _typeof(obj) {
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function _typeof(obj) {
+      return obj &&
+        typeof Symbol === "function" &&
+        obj.constructor === Symbol &&
+        obj !== Symbol.prototype
+        ? "symbol"
+        : typeof obj;
+    };
+  }
+  return _typeof(obj);
+}
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+  return _assertThisInitialized(self);
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError(
+      "this hasn't been initialised - super() hasn't been called"
+    );
+  }
+  return self;
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf
+    ? Object.getPrototypeOf
+    : function _getPrototypeOf(o) {
+        return o.__proto_sn__ || Object.getPrototypeOf(o);
+      };
+  return _getPrototypeOf(o);
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: { value: subClass, writable: true, configurable: true }
+  });
+  if (superClass) _setPrototypeOf(subClass, superClass);
+}
+
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf =
+    Object.setPrototypeOf ||
+    function _setPrototypeOf(o, p) {
+      o.__proto_sn__ = p;
+      return o;
+    };
+  return _setPrototypeOf(o, p);
+}
+
+var SincUtils =
+  /*#__PURE__*/
+  (function(_SincUtilsMS) {
+    _inherits(SincUtils, _SincUtilsMS);
+
+    function SincUtils() {
+      _classCallCheck(this, SincUtils);
+
+      return _possibleConstructorReturn(
+        this,
+        _getPrototypeOf(SincUtils).apply(this, arguments)
+      );
+    }
+
+    return SincUtils;
+  })(SincUtilsMS);
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Breyton.Barber@Nuvolo.com</sys_created_by>
+        <sys_created_on>2019-08-26 21:51:58</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>b3828589db63fb004a8da5094b9619b6</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>SincUtils__deprecated</sys_name>
+        <sys_package display_value="Sincronia" source="x_nuvo_sinc">cd628585db63fb004a8da5094b96198c</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Sincronia">cd628585db63fb004a8da5094b96198c</sys_scope>
+        <sys_update_name>sys_script_include_b3828589db63fb004a8da5094b9619b6</sys_update_name>
+        <sys_updated_by>Breyton.Barber@Nuvolo.com</sys_updated_by>
+        <sys_updated_on>2020-08-25 22:12:15</sys_updated_on>
+    </sys_script_include>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Sincronia">cd628585db63fb004a8da5094b96198c</application>
+        <file_path/>
+        <instance_id>dcb4ae42db8a27409df22f17d4961914</instance_id>
+        <instance_name>ven02738</instance_name>
+        <name>sys_script_include_b3828589db63fb004a8da5094b9619b6</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;public&lt;/access&gt;&lt;active&gt;false&lt;/active&gt;&lt;api_name&gt;x_nuvo_sinc.SincUtils__deprecated&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;description/&gt;&lt;name&gt;SincUtils__deprecated&lt;/name&gt;&lt;script&gt;&lt;![CDATA["use strict";
+
+function _typeof(obj) {
+  if (typeof Symbol === "function" &amp;&amp; typeof Symbol.iterator === "symbol") {
+    _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function _typeof(obj) {
+      return obj &amp;&amp;
+        typeof Symbol === "function" &amp;&amp;
+        obj.constructor === Symbol &amp;&amp;
+        obj !== Symbol.prototype
+        ? "symbol"
+        : typeof obj;
+    };
+  }
+  return _typeof(obj);
+}
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call &amp;&amp; (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+  return _assertThisInitialized(self);
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError(
+      "this hasn't been initialised - super() hasn't been called"
+    );
+  }
+  return self;
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf
+    ? Object.getPrototypeOf
+    : function _getPrototypeOf(o) {
+        return o.__proto_sn__ || Object.getPrototypeOf(o);
+      };
+  return _getPrototypeOf(o);
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" &amp;&amp; superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+  subClass.prototype = Object.create(superClass &amp;&amp; superClass.prototype, {
+    constructor: { value: subClass, writable: true, configurable: true }
+  });
+  if (superClass) _setPrototypeOf(subClass, superClass);
+}
+
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf =
+    Object.setPrototypeOf ||
+    function _setPrototypeOf(o, p) {
+      o.__proto_sn__ = p;
+      return o;
+    };
+  return _setPrototypeOf(o, p);
+}
+
+var SincUtils =
+  /*#__PURE__*/
+  (function(_SincUtilsMS) {
+    _inherits(SincUtils, _SincUtilsMS);
+
+    function SincUtils() {
+      _classCallCheck(this, SincUtils);
+
+      return _possibleConstructorReturn(
+        this,
+        _getPrototypeOf(SincUtils).apply(this, arguments)
+      );
+    }
+
+    return SincUtils;
+  })(SincUtilsMS);
+]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;Breyton.Barber@Nuvolo.com&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2019-08-26 21:51:58&lt;/sys_created_on&gt;&lt;sys_customer_update&gt;false&lt;/sys_customer_update&gt;&lt;sys_id&gt;b3828589db63fb004a8da5094b9619b6&lt;/sys_id&gt;&lt;sys_mod_count&gt;5&lt;/sys_mod_count&gt;&lt;sys_name&gt;SincUtils__deprecated&lt;/sys_name&gt;&lt;sys_package display_value="Sincronia" source="x_nuvo_sinc"&gt;cd628585db63fb004a8da5094b96198c&lt;/sys_package&gt;&lt;sys_policy&gt;read&lt;/sys_policy&gt;&lt;sys_replace_on_upgrade&gt;false&lt;/sys_replace_on_upgrade&gt;&lt;sys_scope display_value="Sincronia"&gt;cd628585db63fb004a8da5094b96198c&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_b3828589db63fb004a8da5094b9619b6&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;Breyton.Barber@Nuvolo.com&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-08-25 22:12:15&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1285712020</payload_hash>
+        <record_name>SincUtils__deprecated</record_name>
+        <reverted_from/>
+        <source>a572b42edbfe5c50ee7c2f625b9619a4</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>Breyton.Barber@Nuvolo.com</sys_created_by>
+        <sys_created_on>2020-08-25 22:12:15</sys_created_on>
+        <sys_id>5e83f86adb329c50ee7c2f625b9619f9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>17427adcc380000001</sys_recorded_at>
+        <sys_updated_by>Breyton.Barber@Nuvolo.com</sys_updated_by>
+        <sys_updated_on>2020-08-25 22:12:15</sys_updated_on>
+        <type>Script Include</type>
+        <update_guid>9283f86a6c329c509dde93272b1af9f9</update_guid>
+        <update_guid_history>9283f86a6c329c509dde93272b1af9f9:-1285712020,5192b4aa50329c5023fbabd5f303bb23:1503219263,9992f46a16329c50bd4d294754f88873:853633714</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>Breyton.Barber@Nuvolo.com</sys_created_by>
+        <sys_created_on>2020-08-25 22:15:39</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_db_object display_value="" name="sys_script_include">sys_script_include</sys_db_object>
+        <sys_id>45b6598b52894560aee4c6d151c2c640</sys_id>
+        <sys_metadata>b3828589db63fb004a8da5094b9619b6</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>SincUtils__deprecated</sys_name>
+        <sys_package display_value="Sincronia" source="x_nuvo_sinc">cd628585db63fb004a8da5094b96198c</sys_package>
+        <sys_parent/>
+        <sys_policy>read</sys_policy>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Sincronia">cd628585db63fb004a8da5094b96198c</sys_scope>
+        <sys_scope_delete display_value="">32cdf2d871dc43719148bfd8cddd79e9</sys_scope_delete>
+        <sys_update_name>sys_script_include_b3828589db63fb004a8da5094b9619b6</sys_update_name>
+        <sys_update_version display_value="sys_script_include_b3828589db63fb004a8da5094b9619b6">5e83f86adb329c50ee7c2f625b9619f9</sys_update_version>
+        <sys_updated_by>Breyton.Barber@Nuvolo.com</sys_updated_by>
+        <sys_updated_on>2020-08-25 22:15:39</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

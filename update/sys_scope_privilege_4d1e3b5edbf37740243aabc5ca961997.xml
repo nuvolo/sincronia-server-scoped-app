@@ -18,7 +18,7 @@
         <sys_updated_by>nick.rakochy@nuvolo.com</sys_updated_by>
         <sys_updated_on>2019-09-12 18:59:10</sys_updated_on>
         <target_name>x_nuvo_eam_export_field_map</target_name>
-        <target_scope display_value="Enterprise Asset Management">c23545ae4f954a00b794a88ca310c798</target_scope>
+        <target_scope display_value="Connected Workplace">c23545ae4f954a00b794a88ca310c798</target_scope>
         <target_type>sys_db_object</target_type>
     </sys_scope_privilege>
 </record_update>

@@ -2,11 +2,11 @@
     <sys_script_include action="INSERT_OR_UPDATE">
         <access>package_private</access>
         <active>true</active>
-        <api_name>x_nuvo_sinc.SincUtilsMS</api_name>
+        <api_name>x_nuvo_sinc.SincUtils</api_name>
         <caller_access/>
         <client_callable>false</client_callable>
         <description/>
-        <name>SincUtilsMS</name>
+        <name>SincUtils</name>
         <script><![CDATA["use strict";
 
 function _typeof(obj) {
@@ -63,17 +63,17 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
-var SincUtilsMS =
+var SincUtils =
   /*#__PURE__*/
   (function() {
-    function SincUtilsMS() {
-      _classCallCheck(this, SincUtilsMS);
+    function SincUtils() {
+      _classCallCheck(this, SincUtils);
 
       _defineProperty(this, "type", void 0);
 
       _defineProperty(this, "typeMap", void 0);
 
-      this.type = "SincUtilsMS";
+      this.type = "SincUtils";
       this.typeMap = {
         css: "css",
         html: "html",
@@ -86,7 +86,7 @@ var SincUtilsMS =
       };
     }
 
-    _createClass(SincUtilsMS, [
+    _createClass(SincUtils, [
       {
         key: "getScopeId",
         value: function getScopeId(scopeName) {
@@ -125,6 +125,49 @@ var SincUtilsMS =
         }
       },
       {
+        key: "getServerScriptId",
+        value: function getServerScriptId() {
+          var gr = new GlideRecord("sys_atf_step_config");
+          gr.addQuery("name", "Run Server Side Script");
+          gr.query();
+          gr.next();
+          return gr.getValue("sys_id");
+        }
+      },
+      {
+        key: "getATFmanifest",
+        value: function getATFmanifest(scopeName) {
+          var scopeId = this.getScopeId(scopeName);
+          var scriptId = this.getServerScriptId();
+          var gr = new GlideRecord("sys_atf_step");
+          gr.addQuery("sys_scope", scopeId);
+          gr.addQuery("step_config", scriptId);
+          gr.query();
+          var records = {};
+
+          while (gr.next()) {
+            var id = gr.getValue("sys_id") || "";
+            var script = gr.inputs.script;
+            script = script ? script.toString() : "";
+            records[id] = {
+              files: [
+                {
+                  name: "inputs.script",
+                  type: "js",
+                  content: script
+                }
+              ],
+              name: id,
+              sys_id: id
+            };
+          }
+
+          return {
+            records: records
+          };
+        }
+      },
+      {
         key: "getManifest",
         value: function getManifest(config) {
           var scopeName = config.scopeName,
@@ -136,7 +179,7 @@ var SincUtilsMS =
             _config$tableOptions = config.tableOptions,
             tableOptions =
               _config$tableOptions === void 0 ? {} : _config$tableOptions;
-          var scopeId = this.getScopeId(scopeName);
+          var scopeId = this.getScopeId(scopeName) || "";
           var tables = {};
           var tableNames = this.getTableNames({
             scopeId: scopeId,
@@ -163,6 +206,7 @@ var SincUtilsMS =
             tables[tableName] = tableMap;
           }
 
+          tables["sys_atf_step"] = this.getATFmanifest(scopeName);
           return {
             tables: tables,
             scope: scopeName
@@ -204,14 +248,14 @@ var SincUtilsMS =
 
           while (recGR.next()) {
             var files = Object.keys(fieldListForTable).map(function(key) {
-              fieldListForTable[key].content = recGR.getValue(key);
+              fieldListForTable[key].content = recGR.getValue(key) || undefined;
               var file = {
                 name: fieldListForTable[key].name,
                 type: fieldListForTable[key].type
               };
 
               if (getContents) {
-                file.content = recGR.getValue(key);
+                file.content = recGR.getValue(key) || undefined;
               }
 
               return file;
@@ -220,7 +264,7 @@ var SincUtilsMS =
             records[recName] = {
               files: files,
               name: recName,
-              sys_id: recGR.getValue("sys_id")
+              sys_id: recGR.getValue("sys_id") || ""
             };
           }
 
@@ -272,7 +316,7 @@ var SincUtilsMS =
           }
 
           if (!recordName || recordName === "") {
-            recordName = recGR.getValue("sys_id");
+            recordName = recGR.getValue("sys_id") || "";
           }
 
           return recordName.replace(/[\/\\]/g, "〳");
@@ -379,8 +423,8 @@ var SincUtilsMS =
 
           while (dictGR.next()) {
             var field = {
-              name: dictGR.getValue("element"),
-              type: this.typeMap[dictGR.getValue("internal_type")]
+              name: dictGR.getValue("element") || "",
+              type: this.typeMap[dictGR.getValue("internal_type") || ""]
             };
             fieldList[field.name] = field;
           } //overrides
@@ -415,6 +459,13 @@ var SincUtilsMS =
             var tableGR = new GlideRecord(tableName);
             var recordMap = missingObj[tableName];
             var tableOpts = tableOptions[tableName] || {};
+
+            if (tableName === "sys_atf_step") {
+              tableOpts = {
+                displayField: "sys_id"
+              };
+            }
+
             var tableMap = {
               records: {}
             };
@@ -424,12 +475,19 @@ var SincUtilsMS =
                 var metaRecord = {
                   name: this.generateRecordName(tableGR, tableOpts),
                   files: [],
-                  sys_id: tableGR.getValue("sys_id")
+                  sys_id: tableGR.getValue("sys_id") || ""
                 };
 
                 for (var i = 0; i < recordMap[recordID].length; i++) {
                   var file = recordMap[recordID][i];
-                  file.content = tableGR.getValue(file.name);
+
+                  if (tableName === "sys_atf_step") {
+                    var script = tableGR.inputs.script;
+                    file.content = script ? script.toString() : "";
+                  } else {
+                    file.content = tableGR.getValue(file.name) || "";
+                  }
+
                   metaRecord.files.push(file);
                 }
 
@@ -470,18 +528,28 @@ var SincUtilsMS =
 
           while (appGR.next()) {
             results.push({
-              displayName: appGR.getValue("name"),
-              scope: appGR.getValue("scope"),
-              sys_id: appGR.getValue("sys_id")
+              displayName: appGR.getValue("name") || "",
+              scope: appGR.getValue("scope") || "",
+              sys_id: appGR.getValue("sys_id") || ""
             });
           }
 
           return results;
         }
+      },
+      {
+        key: "pushATFfile",
+        value: function pushATFfile(sys_id, script) {
+          var gr = new GlideRecord("sys_atf_step");
+          gr.get(sys_id);
+          gr.inputs.script = script;
+          if (gr.update() != null) return true;
+          return false;
+        }
       }
     ]);
 
-    return SincUtilsMS;
+    return SincUtils;
   })();
 ]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
@@ -489,14 +557,14 @@ var SincUtilsMS =
         <sys_created_on>2019-08-26 21:52:34</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>4da2c589db63fb004a8da5094b9619a9</sys_id>
-        <sys_mod_count>10</sys_mod_count>
-        <sys_name>SincUtilsMS</sys_name>
+        <sys_mod_count>18</sys_mod_count>
+        <sys_name>SincUtils</sys_name>
         <sys_package display_value="Sincronia" source="x_nuvo_sinc">cd628585db63fb004a8da5094b96198c</sys_package>
         <sys_policy>read</sys_policy>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Sincronia">cd628585db63fb004a8da5094b96198c</sys_scope>
         <sys_update_name>sys_script_include_4da2c589db63fb004a8da5094b9619a9</sys_update_name>
         <sys_updated_by>Breyton.Barber@Nuvolo.com</sys_updated_by>
-        <sys_updated_on>2019-11-13 22:09:39</sys_updated_on>
+        <sys_updated_on>2020-08-25 22:19:59</sys_updated_on>
     </sys_script_include>
 </record_update>
