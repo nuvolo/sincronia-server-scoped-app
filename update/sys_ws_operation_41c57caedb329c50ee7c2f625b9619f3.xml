@@ -7,8 +7,7 @@
         <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
         <http_method>POST</http_method>
         <name>Push ATF File</name>
-        <operation_script><![CDATA["use strict";
-
+        <operation_script><![CDATA[
 (function process(
   /*RESTAPIRequest*/
   request,
@@ -35,15 +34,15 @@
         <sys_created_on>2020-08-25 22:23:46</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>41c57caedb329c50ee7c2f625b9619f3</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name>Push ATF File</sys_name>
         <sys_package display_value="Sincronia" source="x_nuvo_sinc">cd628585db63fb004a8da5094b96198c</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Sincronia">cd628585db63fb004a8da5094b96198c</sys_scope>
         <sys_update_name>sys_ws_operation_41c57caedb329c50ee7c2f625b9619f3</sys_update_name>
-        <sys_updated_by>Breyton.Barber@Nuvolo.com</sys_updated_by>
-        <sys_updated_on>2020-08-25 22:24:20</sys_updated_on>
+        <sys_updated_by>Jake.Ye@nuvolo.com</sys_updated_by>
+        <sys_updated_on>2021-07-30 19:19:43</sys_updated_on>
         <web_service_definition display_value="Sincronia">6de28989db63fb004a8da5094b961996</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>

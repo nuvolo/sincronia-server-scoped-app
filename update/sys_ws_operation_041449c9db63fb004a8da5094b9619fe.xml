@@ -7,8 +7,7 @@
         <enforce_acl>8fc309c9db63fb004a8da5094b961984</enforce_acl>
         <http_method>GET</http_method>
         <name>Get App List</name>
-        <operation_script><![CDATA["use strict";
-
+        <operation_script><![CDATA[
 (function process(
   /*RESTAPIRequest*/
   request,
@@ -33,15 +32,15 @@
         <sys_created_on>2019-08-26 21:59:19</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>041449c9db63fb004a8da5094b9619fe</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_name>Get App List</sys_name>
         <sys_package display_value="Sincronia" source="x_nuvo_sinc">cd628585db63fb004a8da5094b96198c</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Sincronia">cd628585db63fb004a8da5094b96198c</sys_scope>
         <sys_update_name>sys_ws_operation_041449c9db63fb004a8da5094b9619fe</sys_update_name>
-        <sys_updated_by>Breyton.Barber@nuvolo.com</sys_updated_by>
-        <sys_updated_on>2019-08-26 22:35:46</sys_updated_on>
+        <sys_updated_by>Jake.Ye@nuvolo.com</sys_updated_by>
+        <sys_updated_on>2021-07-30 19:19:21</sys_updated_on>
         <web_service_definition display_value="Sincronia">6de28989db63fb004a8da5094b961996</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
