@@ -215,10 +215,12 @@ var SincUtilsMS =
               return file;
             });
             var recName = this.generateRecordName(recGR, tableOptions);
+			var isRepetead = (records[recName] != null);
             records[recName] = {
               files: files,
               name: recName,
-              sys_id: recGR.getValue("sys_id")
+              sys_id: recGR.getValue("sys_id"),
+			  is_repetead: isRepetead	
             };
           }
 
@@ -405,6 +407,23 @@ var SincUtilsMS =
         }
       },
       {
+        key: "isRepetead",
+        value: function isRepetead(recName, tableName, tableOpts) {
+          var tableGR = new GlideRecord(tableName);
+          tableGR.query();
+
+          var count = 0;
+          var currentRecName = "";
+          while (tableGR.next() && count < 2) {
+              currentRecName = this.generateRecordName(tableGR, tableOpts);
+              if (recName == currentRecName)
+				  count++;
+          }
+		  
+		  return (count == 2);
+        }
+      },
+      {
         key: "processMissingFiles",
         value: function processMissingFiles(missingObj, tableOptions) {
           var fileTableMap = {};
@@ -419,9 +438,12 @@ var SincUtilsMS =
 
             for (var recordID in recordMap) {
               if (tableGR.get(recordID)) {
+				var recName = this.generateRecordName(tableGR, tableOpts);
+				var repeteadValue = this.isRepetead(recName, tableName, tableOpts);
                 var metaRecord = {
-                  name: this.generateRecordName(tableGR, tableOpts),
+                  name: recName,
                   files: [],
+				  is_repetead: repeteadValue,
                   sys_id: tableGR.getValue("sys_id")
                 };
 
@@ -432,7 +454,7 @@ var SincUtilsMS =
                 }
 
                 tableMap.records[
-                  this.generateRecordName(tableGR, tableOpts)
+                  recName
                 ] = metaRecord;
               }
             }
@@ -485,16 +507,14 @@ var SincUtilsMS =
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>Breyton.Barber@Nuvolo.com</sys_created_by>
         <sys_created_on>2019-08-26 21:52:34</sys_created_on>
-        <sys_customer_update>false</sys_customer_update>
         <sys_id>4da2c589db63fb004a8da5094b9619a9</sys_id>
-        <sys_mod_count>11</sys_mod_count>
+        <sys_mod_count>14</sys_mod_count>
         <sys_name>SincUtilsMS</sys_name>
         <sys_package display_value="Sincronia" source="x_nuvo_sinc">cd628585db63fb004a8da5094b96198c</sys_package>
         <sys_policy>read</sys_policy>
-        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Sincronia">cd628585db63fb004a8da5094b96198c</sys_scope>
         <sys_update_name>sys_script_include_4da2c589db63fb004a8da5094b9619a9</sys_update_name>
-        <sys_updated_by>Jake.Ye@nuvolo.com</sys_updated_by>
-        <sys_updated_on>2021-07-27 17:39:32</sys_updated_on>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-12-22 20:03:12</sys_updated_on>
     </sys_script_include>
 </record_update>
